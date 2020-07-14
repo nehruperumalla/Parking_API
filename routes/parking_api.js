@@ -1,23 +1,14 @@
 import express from 'express';
-
+import { parkCar, unparkCar, getInfo } from '../controllers/parking_controller.js';
 const router = express.Router();
 
 //Park the Car
-router.post('/parkCar', (req, res) => {
-    res.send('Provide us your car number we will allocate you an empty slot.');
-    console.log('In park car')
-})
+router.post('/parkCar', parkCar);
 
 //Unpark the Car
-router.delete('/unparkCar', (req,res) => {
-    res.send('Provide us your slot number.');
-    console.log('In unpark car')
-})
+router.delete('/unparkCar', unparkCar);
 
 //Info of Car/Slot
-router.get('/getInfo', (req, res) => {
-    res.send('Provide us your car number or slot number to get information.');
-    console.log('In get info')
-})
+router.get('/getInfo', getInfo);
 
 export default router;
