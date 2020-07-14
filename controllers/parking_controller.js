@@ -1,3 +1,5 @@
+import assert from 'assert';
+
 let carSlotMap = new Map();
 
 let slotCarMap = new Map();
@@ -13,8 +15,16 @@ export const createParking = () => {
 }
 
 export const parkCar = (req, res) => {
-    res.send('Provide us your car number we will allocate you an empty slot.');
-    console.log('In park car')
+    try {
+        assert(availableSlots.length > 0);
+        const vNumber = req.body;
+        console.log(req.body);
+        let POS = Math.floor(Math.random() * Math.floor(availableSlots.length));
+        carSlotMap.set(vNumber, availableSlots[POS]);
+        res.status(200).send(availableSlots[POS])
+    } catch(err) {
+        res.status(200).send('Sorry, No empty space available.');
+    }
 }
 
 export const unparkCar = (req,res) => {
