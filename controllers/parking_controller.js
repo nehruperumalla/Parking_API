@@ -37,9 +37,9 @@ export const unparkCar = (req,res) => {
         slotCarMap.delete(SLOT);
         carSlotMap.delete(vNumber);
         availableSlots.push(SLOT);
-        res.send('Thank you for parking with us :)');
+        res.status(200).send('Thank you for parking with us :)');
     } catch(err) {
-        res.status(200).send('Sorry, Wrong slot. Please try again.')
+        res.status(400).send('Sorry, Wrong slot. Please try again.')
     }
 }
 
