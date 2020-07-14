@@ -1,5 +1,9 @@
 import assert from 'assert';
-import e from 'express';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+console.log('Parking lot size through .env is', process.env.PARKING_LOT_SIZE);
 
 let carSlotMap = new Map();
 
@@ -8,11 +12,17 @@ let slotCarMap = new Map();
 let availableSlots = [];
 
 export const createParking = () => {
+    loop1:
     for(let i = 10; i < 36; i++) {
-        for(let j = 1; j <= 100; j++) {
+        loop2:
+        for(let j = 1; j <= 1000; j++) {
             availableSlots.push(i.toString(36).toUpperCase() + "-" + j);
+            if(process.env.PARKING_LOT_SIZE == availableSlots.length) {
+                break loop1;
+            }
         }
     }
+    console.log(availableSlots)
 }
 
 export const parkCar = (req, res) => {
