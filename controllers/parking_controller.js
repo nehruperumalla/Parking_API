@@ -19,7 +19,7 @@ export const parkCar = (req, res) => {
         assert(availableSlots.length > 0);
         const vNumber = req.body.vNumber;
         let POS = Math.floor(Math.random() * Math.floor(availableSlots.length));
-        slot = availableSlots[POS];
+        const slot = availableSlots[POS];
         carSlotMap.set(vNumber, slot);
         slotCarMap.set(slot, vNumber);
         availableSlots.splice(POS, 1);
