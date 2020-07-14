@@ -10,3 +10,5 @@ router.delete('/', (req,res) => {})
 
 //Info of Car/Slot
 router.get('/', (req, res) => {})
+
+export default router;
