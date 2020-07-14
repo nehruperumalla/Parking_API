@@ -1,6 +1,9 @@
 import express from 'express';
-import { parkCar, unparkCar, getInfo } from '../controllers/parking_controller.js';
+import { parkCar, unparkCar, getInfo, createParking } from '../controllers/parking_controller.js';
 const router = express.Router();
+
+//Create the Parking slots.
+createParking();
 
 //Park the Car
 router.post('/parkCar', parkCar);
