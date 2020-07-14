@@ -21,7 +21,8 @@ export const parkCar = (req, res) => {
         console.log(req.body);
         let POS = Math.floor(Math.random() * Math.floor(availableSlots.length));
         carSlotMap.set(vNumber, availableSlots[POS]);
-        res.status(200).send(availableSlots[POS])
+        slotCarMap.set(availableSlots[POS], vNumber);
+        res.status(200).send(availableSlots[POS]);
     } catch(err) {
         res.status(200).send('Sorry, No empty space available.');
     }
