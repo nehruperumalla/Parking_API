@@ -30,8 +30,17 @@ export const parkCar = (req, res) => {
 }
 
 export const unparkCar = (req,res) => {
-    res.send('Provide us your slot number.');
-    console.log('In unpark car')
+    const SLOT = req.body.slot;
+    try {
+        assert(slotCarMap.has(SLOT));
+        const vNumber = slotCarMap.get(SLOT);
+        slotCarMap.delete(SLOT);
+        carSlotMap.delete(vNumber);
+        availableSlots.push(SLOT);
+        res.send('Thank you for parking with us :)');
+    } catch(err) {
+        res.status(200).send('Sorry, Wrong slot. Please try again.')
+    }
 }
 
 export const getInfo = (req, res) => {
