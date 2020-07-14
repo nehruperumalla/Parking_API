@@ -17,8 +17,7 @@ export const createParking = () => {
 export const parkCar = (req, res) => {
     try {
         assert(availableSlots.length > 0);
-        const vNumber = req.body;
-        console.log(req.body);
+        const vNumber = req.body.vNumber;
         let POS = Math.floor(Math.random() * Math.floor(availableSlots.length));
         carSlotMap.set(vNumber, availableSlots[POS]);
         slotCarMap.set(availableSlots[POS], vNumber);
