@@ -1,4 +1,5 @@
 import assert from 'assert';
+import e from 'express';
 
 let carSlotMap = new Map();
 
@@ -25,7 +26,11 @@ export const parkCar = (req, res) => {
         availableSlots.splice(POS, 1);
         res.status(200).send(slot);
     } catch(err) {
-        res.status(200).send('Sorry, No empty space available.');
+        if(err.name == 'AssertionError') {
+            res.status(200).send('Sorry, No empty space available.');
+        } else {
+            res.status(500).send('Something went wrong');
+        }
     }
 }
 
@@ -39,7 +44,11 @@ export const unparkCar = (req,res) => {
         availableSlots.push(SLOT);
         res.status(200).send('Thank you for parking with us :)');
     } catch(err) {
-        res.status(400).send('Sorry, Wrong slot. Please try again.')
+        if(err.name == 'AssertionError') {
+            res.status(200).send('Sorry, Wrong slot. Please try again.');
+        } else {
+            res.status(500).send('Something went wrong');
+        }
     }
 }
 
