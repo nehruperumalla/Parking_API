@@ -53,6 +53,19 @@ export const unparkCar = (req,res) => {
 }
 
 export const getInfo = (req, res) => {
-    res.send('Provide us your car number or slot number to get information.');
-    console.log('In get info')
+    const slot = req.query.slot;
+    const vNumber = req.query.vNumber;
+    if(slot !== undefined && slotCarMap.has(slot)) {
+        res.status(200).send({
+            slot : slot,
+            vNumber : slotCarMap.get(slot)
+        })
+    } else if(vNumber !== undefined && carSlotMap.has(vNumber)) {
+        res.status(200).send({
+            slot : carSlotMap.get(vNumber),
+            vNumber : vNumber
+        })
+    } else {
+        res.status(400).send('No Record Found!')
+    }
 }
