@@ -35,13 +35,13 @@ export const parkCar = (req, res) => {
 }
 
 export const unparkCar = (req,res) => {
-    const SLOT = req.body.slot;
+    const { slot } = req.params;
     try {
-        assert(slotCarMap.has(SLOT));
-        const vNumber = slotCarMap.get(SLOT);
-        slotCarMap.delete(SLOT);
+        assert(slotCarMap.has(slot));
+        const vNumber = slotCarMap.get(slot);
+        slotCarMap.delete(slot);
         carSlotMap.delete(vNumber);
-        availableSlots.push(SLOT);
+        availableSlots.push(slot);
         res.status(200).send('Thank you for parking with us :)');
     } catch(err) {
         if(err.name == 'AssertionError') {

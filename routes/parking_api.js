@@ -9,7 +9,7 @@ createParking();
 router.post('/parkCar', parkCar);
 
 //Unpark the Car
-router.delete('/unparkCar', unparkCar);
+router.delete('/unparkCar/:slot', unparkCar);
 
 //Info of Car/Slot
 router.get('/getInfo', getInfo);
