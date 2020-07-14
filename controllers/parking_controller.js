@@ -19,12 +19,16 @@ export const parkCar = (req, res) => {
     try {
         assert(availableSlots.length > 0);
         const vNumber = req.body.vNumber;
-        let POS = Math.floor(Math.random() * Math.floor(availableSlots.length));
-        const slot = availableSlots[POS];
-        carSlotMap.set(vNumber, slot);
-        slotCarMap.set(slot, vNumber);
-        availableSlots.splice(POS, 1);
-        res.status(200).send(slot);
+        if(carSlotMap.has(vNumber)) {
+            res.send('Your car is already parked, if not contact the management. Thank you.')
+        } else {
+            let POS = Math.floor(Math.random() * Math.floor(availableSlots.length));
+            const slot = availableSlots[POS];
+            carSlotMap.set(vNumber, slot);
+            slotCarMap.set(slot, vNumber);
+            availableSlots.splice(POS, 1);
+            res.status(200).send(slot);
+        }
     } catch(err) {
         if(err.name == 'AssertionError') {
             res.status(200).send('Sorry, No empty space available.');
